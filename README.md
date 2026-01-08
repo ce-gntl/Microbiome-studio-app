@@ -1,94 +1,98 @@
-# Microbiome-studio-app
-The application is organized into five main modules, each designed to support a complete microbiome data analysis workflow.
+# Microbiome Analysis Shiny Application
 
-1. Data Upload
+An interactive R Shiny application for end-to-end microbiome data analysis, including compositional analysis, diversity metrics, PERMANOVA testing, and differential abundance analysis using ANCOM-BC.
 
-Allows users to upload .csv files containing:
+## Table of Contents
+  
+- [Overview](#overview)
+- [Features](#features)
+- [Application Modules](#application-modules)
+- [Input Data Format](#input-data-format)
+- [Outputs](#outputs)
+- [Technologies Used](#technologies-used)
 
-OTU abundance data
 
-Patient metadata
+## Overview
 
-Uploaded data are used to construct a phyloseq object, which serves as the foundation for all downstream analyses.
+This application provides an interactive framework for analyzing microbiome sequencing data. Users can upload OTU abundance tables and associated metadata, explore compositional patterns, calculate diversity metrics, and perform differential abundance testing through a unified web interface.
+The application is built using R Shiny and leverages established microbiome analysis packages such as phyloseq, vegan, and ANCOMBC.
 
-2. Compositional Analysis
+## Features
+-	Upload and validate microbiome count and metadata files
+-	Interactive compositional visualizations
+-	Alpha and beta diversity analysis with statistical testing
+-	Differential abundance testing with compositional bias correction
+-	Downloadable tables and publication-ready plots
+-	Modular and scalable codebase
 
-Provides interactive visualizations, including:
+## Application Modules
+### Data Upload
 
-Venn diagrams
+Upload .csv files containing:
+-	OTU abundance data
+-	Sample metadata
+-	Data are combined into a phyloseq object for downstream analysis.
+  
+### Compositional Analysis
 
-Heatmaps
+Interactive visualizations:
 
-Bar plots
+-	Venn diagrams
+-	Heatmaps
+-	Bar plots
+-	Visualizations update dynamically based on:
+-	Detection thresholds
+-	Prevalence thresholds
+  
+### Alpha Diversity
 
-Visualizations dynamically update based on user-defined:
+- Calculates common alpha diversity indices
+- Enables group comparisons using the Wilcoxon–Mann–Whitney test
+  
+### Beta Diversity and PERMANOVA
 
-Detection thresholds
-
-Prevalence thresholds
-
-3. Alpha Diversity
-
-Computes standard alpha diversity indices
-
-Enables group comparisons using the Wilcoxon–Mann–Whitney test
-
-Results are presented through interactive tables and plots
-
-4. Beta Diversity and PERMANOVA
-
-Generates ordination plots using:
-
-PCoA on Bray–Curtis or Jaccard distances
-
-Includes:
-
-Dispersion analysis via PERMDISP (betadisper)
-
-Statistical testing using PERMANOVA (adonis2)
-
-Outputs are visual and exportable
-
-5. ANCOM-BC Analysis
-
+Ordination via PCoA using:
+-	Bray–Curtis distances
+-	Jaccard distances
+	-	Includes:
+	  -	Dispersion analysis (PERMDISP, betadisper)
+	  -	PERMANOVA testing (adonis2)
+### ANCOM-BC Analysis
 Performs:
+-	Normalization
+-	Compositional bias correction
+-	Differential abundance testing
+Outputs:
+-	Log fold change plots with confidence intervals
+-	Exportable result tables
 
-Data normalization
+## Input Data Format
+### OTU Table
+- **Rows**: OTUs
+- **Columns**: Samples
+- **Values**: Raw or normalized counts
+### Taxonomy Table 
+- **Rows**: OTUs
+- **Columns**: Taxonomic rank
+### Metadata Table
+- **Rows**: Samples
+- **Columns**: Experimental variables (e.g., group, treatment, timepoint)
 
-Compositional bias correction
+> Files must be provided in .csv format and contain matching sample IDs.
 
-Differential abundance testing
+## Outputs
+- Interactive tables (sortable, searchable, downloadable)
+- Alpha diversity plots and statistics
+- Beta diversity ordination plots
+- PERMANOVA and dispersion results
+- Differential abundance plots and tables from ANCOM-BC
+  
+> All tables are rendered using R’s DT package.
 
-Produces:
-
-Log fold change plots with confidence intervals
-
-Downloadable result tables
-
-Interactivity and Data Export
-
-All tabular outputs are rendered using R’s DT package
-
-Features include:
-
-Sorting
-
-Searching
-
-Direct downloading of tables
-
-Implementation Details
-
-The application was tested locally
-
-Designed for future server deployment
-
-Codebase is modularized into separate scripts:
-
-ui.R
-
-server.R
-
-Supporting function scripts
-
-This structure ensures maintainability, scalability, and ease of future development.
+## Technologies Used
+- R Shiny
+- phyloseq
+- vegan
+- ANCOMBC
+- ggplot2
+- DT
